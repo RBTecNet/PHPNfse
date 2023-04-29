@@ -1,4 +1,4 @@
 /vendor/
-updategit.bat
-.gitignore
-.idea
+/updategit.bat
+/.gitignore
+/.idea
