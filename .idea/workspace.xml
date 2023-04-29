@@ -2,14 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="590876e5-eb1d-4c6a-9b3e-f17b5adc02c2" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/Provedores/NotaCarioca/Operations/Cancelar/CancelarNfse.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Provedores/NotaCarioca/Operations/Consultar/ConsultarNfse.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Provedores/NotaCarioca/Operations/Download/DownloadDanfeNfse.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Provedores/NotaCarioca/Operations/Gerar/GerarNfse.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Provedores/NotaCarioca/Soap.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Provedores/NotaCarioca/Operations/Consultar/GerarXmlConsulta.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/index.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/Carioca/Consulta.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Provedores/NotaCarioca/Operations/Consultar/ConsultarNfse.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Provedores/NotaCarioca/Operations/Consultar/ConsultarNfse.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Provedores/NotaCarioca/Soap.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Provedores/NotaCarioca/Soap.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -29,6 +27,27 @@
   <component name="PhpWorkspaceProjectConfiguration">
     <include_path>
       <path value="$PROJECT_DIR$/vendor/composer" />
+      <path value="$PROJECT_DIR$/vendor/vanilla/garden-schema" />
+      <path value="$PROJECT_DIR$/vendor/phpdocumentor/reflection-docblock" />
+      <path value="$PROJECT_DIR$/vendor/phpdocumentor/type-resolver" />
+      <path value="$PROJECT_DIR$/vendor/phpstan/phpdoc-parser" />
+      <path value="$PROJECT_DIR$/vendor/phpdocumentor/reflection-common" />
+      <path value="$PROJECT_DIR$/vendor/symfony/deprecation-contracts" />
+      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-ctype" />
+      <path value="$PROJECT_DIR$/vendor/symfony/property-access" />
+      <path value="$PROJECT_DIR$/vendor/symfony/property-info" />
+      <path value="$PROJECT_DIR$/vendor/symfony/serializer" />
+      <path value="$PROJECT_DIR$/vendor/symfony/serializer-pack" />
+      <path value="$PROJECT_DIR$/vendor/doctrine/annotations" />
+      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-intl-grapheme" />
+      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-intl-normalizer" />
+      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-mbstring" />
+      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-php80" />
+      <path value="$PROJECT_DIR$/vendor/symfony/string" />
+      <path value="$PROJECT_DIR$/vendor/doctrine/deprecations" />
+      <path value="$PROJECT_DIR$/vendor/psr/cache" />
+      <path value="$PROJECT_DIR$/vendor/doctrine/lexer" />
+      <path value="$PROJECT_DIR$/vendor/webmozart/assert" />
     </include_path>
   </component>
   <component name="ProjectId" id="2P6adxOPFmQPpj6DJEKho9xCdH5" />
@@ -44,6 +63,11 @@
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\bruno\OneDrive\Área de Trabalho\projetos\rbtecnet-nfse\Carioca" />
+    </key>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -52,7 +76,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1682780083848</updated>
-      <workItem from="1682780091479" duration="8054000" />
+      <workItem from="1682780091479" duration="15138000" />
     </task>
     <servers />
   </component>

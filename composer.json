@@ -14,5 +14,8 @@
             "email": "bruno@rbtecnologia.net.br"
         }
     ],
-    "require": {}
+    "require": {
+        "vanilla/garden-schema": "^3.0",
+        "symfony/serializer-pack": "^1.2"
+    }
 }
