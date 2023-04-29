@@ -1,0 +1,18 @@
+{
+    "name": "rbtecnet/phpnfse",
+    "description": "Biblioteca de Emissao de Nota Fiscal de Serviços",
+    "type": "library",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Rbtecnet\\Phpnfse\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "RBTecNet",
+            "email": "bruno@rbtecnologia.net.br"
+        }
+    ],
+    "require": {}
+}
