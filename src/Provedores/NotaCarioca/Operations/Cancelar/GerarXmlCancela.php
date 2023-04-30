@@ -37,9 +37,6 @@ class GerarXmlCancela
         $xml = str_replace('</rootnode>', '', $xml);
         $this->addEnvelope($xml);
         return $xml;
-        return;
-
-
     }
     public function getSchemaStructure()
     {
