@@ -2,11 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="590876e5-eb1d-4c6a-9b3e-f17b5adc02c2" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/Provedores/NotaCarioca/Operations/Consultar/GerarXmlConsulta.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Carioca/Exemplos/Cancelar.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Provedores/NotaCarioca/Operations/Cancelar/GerarXmlCancela.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Carioca/Consulta.php" beforeDir="false" afterPath="$PROJECT_DIR$/Carioca/Exemplos/Consulta.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/Carioca/Consulta.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Provedores/NotaCarioca/Operations/Cancelar/CancelarNfse.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Provedores/NotaCarioca/Operations/Cancelar/CancelarNfse.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Provedores/NotaCarioca/Operations/Consultar/ConsultarNfse.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Provedores/NotaCarioca/Operations/Consultar/ConsultarNfse.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Provedores/NotaCarioca/Operations/Consultar/GerarXmlConsulta.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Provedores/NotaCarioca/Operations/Consultar/GerarXmlConsulta.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Provedores/NotaCarioca/Soap.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Provedores/NotaCarioca/Soap.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -65,6 +68,7 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\bruno\OneDrive\Área de Trabalho\projetos\rbtecnet-nfse\Carioca\Exemplos_Carioca" />
       <recent name="C:\Users\bruno\OneDrive\Área de Trabalho\projetos\rbtecnet-nfse\Carioca" />
     </key>
   </component>
@@ -76,7 +80,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1682780083848</updated>
-      <workItem from="1682780091479" duration="15138000" />
+      <workItem from="1682780091479" duration="24032000" />
     </task>
     <servers />
   </component>

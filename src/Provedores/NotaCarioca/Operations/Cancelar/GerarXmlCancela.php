@@ -1,23 +1,27 @@
 <?php
 
-namespace Rbtecnet\Phpnfse\Provedores\NotaCarioca\Operations\Consultar;
+namespace Rbtecnet\Phpnfse\Provedores\NotaCarioca\Operations\Cancelar;
 
 use Garden\Schema\Schema;
 use Garden\Schema\ValidationException;
-use http\Exception;
 use Symfony\Component\Serializer\Encoder\XmlEncoder;
 
-class GerarXmlConsulta
+class GerarXmlCancela
 {
-    function GerarXmlConsulta(array $dados=[]){
+    function GerarXmlCancela(array $dados=[]){
         $encode = new XmlEncoder();
         $estrutura = $this->getSchemaStructure();
+
         $data = [
-            'ConsultarNfseEnvio' => [
+            'CancelarNfseEnvio' => [
                 '@xmlns' => 'http://www.abrasf.org.br/ABRASF/arquivos/nfse.xsd',
-                'Prestador' => $dados['Prestador'],
-                'PeriodoEmissao' => $dados['PeriodoEmissao'],
-                'Tomador' => $dados['Tomador'],
+                'Pedido' => [
+                    '@xmlns' => 'http://www.abrasf.org.br/ABRASF/arquivos/nfse.xsd',
+                    'InfPedidoCancelamento' => [
+                        'IdentificacaoNfse' => $dados['IdentificacaoNfse'],
+                        'CodigoCancelamento' => $dados['CodigoCancelamento'],
+                    ],
+                ],
             ],
         ];
         //valida o array baseado na estrutura
@@ -33,33 +37,40 @@ class GerarXmlConsulta
         $xml = str_replace('</rootnode>', '', $xml);
         $this->addEnvelope($xml);
         return $xml;
+        return;
+
+
     }
     public function getSchemaStructure()
     {
         return [
-            'ConsultarNfseEnvio' => [
-                'Prestador' => ['Cnpj', 'InscricaoMunicipal'],
-                'PeriodoEmissao' => ['DataInicial', 'DataFinal'],
-                'Tomador' => [
-                    'CpfCnpj' => [
-                        'Cpf?',
-                        'Cnpj?',
+            'CancelarNfseEnvio' => [
+                'Pedido' => [
+                    'InfPedidoCancelamento' => [
+                        'IdentificacaoNfse' => [
+                            'Numero',
+                            'Cnpj',
+                            'InscricaoMunicipal',
+                            'CodigoMunicipio',
+                        ],
+                        'CodigoCancelamento',
                     ],
                 ],
             ],
         ];
     }
+
     public function addEnvelope(string &$content)
     {
         $env = '<soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
             <soap:Body>
-                <ConsultarNfseRequest xmlns="http://notacarioca.rio.gov.br/">
+                <CancelarNfseRequest xmlns="http://notacarioca.rio.gov.br/">
                     <inputXML>
                     <![CDATA[
                         PLACEHOLDER
                     ]]>
                     </inputXML>
-                </ConsultarNfseRequest>
+                </CancelarNfseRequest>
             </soap:Body>
         </soap:Envelope>';
         $content = str_replace('PLACEHOLDER', $content, $env);
