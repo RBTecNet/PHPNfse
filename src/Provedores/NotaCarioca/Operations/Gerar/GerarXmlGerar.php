@@ -2,6 +2,9 @@
 
 namespace Rbtecnet\Phpnfse\Provedores\NotaCarioca\Operations\Gerar;
 
+use Garden\Schema\Schema;
+use Garden\Schema\ValidationException;
+use Rbtecnet\Phpnfse\Provedores\NotaCarioca\Soap;
 use Symfony\Component\Serializer\Encoder\XmlEncoder;
 
 class GerarXmlGerar
@@ -12,32 +15,41 @@ class GerarXmlGerar
         $data = [
             'InfRps' => [
                 '@xmlns' => 'http://www.abrasf.org.br/ABRASF/arquivos/nfse.xsd',
-                '@Id' => $this->rps['IdentificacaoRps']['Numero'],
-                'IdentificacaoRps' => $this->rps['IdentificacaoRps'],
-                'DataEmissao' => $this->rps['DataEmissao'],
-                'NaturezaOperacao' => $this->rps['NaturezaOperacao'],
-                'RegimeEspecialTributacao' => isset($this->rps['RegimeEspecialTributacao']) ? $this->rps['RegimeEspecialTributacao'] : null,
-                'OptanteSimplesNacional' => $this->rps['OptanteSimplesNacional'],
-                'IncentivadorCultural' => $this->rps['IncentivadorCultural'],
-                'Status' => $this->rps['Status'],
-                'RpsSubstituido' => isset($this->rps['RpsSubstituido']) ? $this->rps['RpsSubstituido'] : null,
+                '@Id' => $dados['IdentificacaoRps']['Numero'],
+                'IdentificacaoRps' => $dados['IdentificacaoRps'],
+                'DataEmissao' => $dados['DataEmissao'],
+                'NaturezaOperacao' => $dados['NaturezaOperacao'],
+                'RegimeEspecialTributacao' => isset($dados['RegimeEspecialTributacao']) ? $dados['RegimeEspecialTributacao'] : null,
+                'OptanteSimplesNacional' => $dados['OptanteSimplesNacional'],
+                'IncentivadorCultural' => $dados['IncentivadorCultural'],
+                'Status' => $dados['Status'],
+                'RpsSubstituido' => isset($dados['RpsSubstituido']) ? $dados['RpsSubstituido'] : null,
                 'Servico' => [
-                    'Valores' => $this->rps['Servico']['Valores'],
-                    'ItemListaServico' => $this->rps['Servico']['ItemListaServico'],
-                    'CodigoTributacaoMunicipio' => $this->rps['Servico']['CodigoTributacaoMunicipio'],
-                    'Discriminacao' => $this->rps['Servico']['Discriminacao'],
-                    'CodigoMunicipio' => $this->rps['Servico']['CodigoMunicipio'],
+                    'Valores' => $dados['Servico']['Valores'],
+                    'ItemListaServico' => $dados['Servico']['ItemListaServico'],
+                    'CodigoTributacaoMunicipio' => $dados['Servico']['CodigoTributacaoMunicipio'],
+                    'Discriminacao' => $dados['Servico']['Discriminacao'],
+                    'CodigoMunicipio' => $dados['Servico']['CodigoMunicipio'],
                 ],
-                'Prestador' => $this->rps['Prestador'],
-                'Tomador' => $this->rps['Tomador'],
-                'IntermediarioServico' => isset($this->rps['IntermediarioServico']) ? $this->rps['IntermediarioServico'] : null,
-                 'ConstrucaoCivil' => isset($this->rps['ConstrucaoCivil']) ? $this->rps['ConstrucaoCivil'] : null,
+                'Prestador' => $dados['Prestador'],
+                'Tomador' => $dados['Tomador'],
+                'IntermediarioServico' => isset($dados['IntermediarioServico']) ? $dados['IntermediarioServico'] : null,
+                 'ConstrucaoCivil' => isset($dados['ConstrucaoCivil']) ? $dados['ConstrucaoCivil'] : null,
             ],
         ];
-
-
-
-
+        //valida o array baseado na estrutura
+        try{
+            $schema = Schema::parse($estrutura);
+            $schema->validate($data);
+        }catch (ValidationException $ve){
+            throw new \Exception(__FILE__.':'.__LINE__.' - '.$ve->getMessage());
+        }
+        $xml = $encode->encode($data,'xml', ['xml_root_node_name' => 'rootnode', 'remove_empty_tags' => true]);
+        $xml = str_replace('<?xml version="1.0"?>', '', $xml);
+        $xml = str_replace('<rootnode>', '', $xml);
+        $xml = str_replace('</rootnode>', '', $xml);
+        $this->addEnvelope($xml);
+        return $xml;
     }
 
 
@@ -91,4 +103,26 @@ class GerarXmlGerar
             ],
         ];
     }
+
+    public function addEnvelope(string &$content)
+    {
+        $content = '<GerarNfseEnvio xmlns="http://notacarioca.rio.gov.br/WSNacional/XSD/1/nfse_pcrj_v01.xsd"><Rps>'.$content.'</Rps></GerarNfseEnvio>';
+        $env = '<soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+            <soap:Body>
+                <GerarNfseRequest xmlns="http://notacarioca.rio.gov.br/">
+                    <inputXML>
+                    <![CDATA[
+                        PLACEHOLDER
+                    ]]>
+                    </inputXML>
+                </GerarNfseRequest >
+            </soap:Body>
+        </soap:Envelope>';
+        $content = str_replace('PLACEHOLDER', $content, $env);
+    }
+
+
+
+
+
 }

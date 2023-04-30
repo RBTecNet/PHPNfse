@@ -2,6 +2,7 @@
 
 namespace Rbtecnet\Phpnfse\Provedores\NotaCarioca;
 
+use phpDocumentor\Reflection\Types\Null_;
 use Symfony\Component\Serializer\Encoder\XmlEncoder;
 
 class Soap
@@ -16,6 +17,7 @@ class Soap
                 $endpoint = 'https://notacarioca.rio.gov.br/WSNacional/nfse.asmx';
                 break;
         }
+
         switch ($acao){
             case 'Consultar':
                 $action = 'http://notacarioca.rio.gov.br/ConsultarNfse';
@@ -23,7 +25,12 @@ class Soap
             case 'Cancelar':
                 $action = 'http://notacarioca.rio.gov.br/CancelarNfse';
                 break;
+            case 'GerarNfse':
+                $action = 'http://notacarioca.rio.gov.br/GerarNfse';
+                break;
         }
+
+
         $msgSize = strlen($xml);
         $headers = ['Content-Type: text/xml;charset=UTF-8', "SOAPAction: \"$action\"", "Content-length: $msgSize"];
         //Configuracao do Curl
@@ -68,15 +75,24 @@ class Soap
             throw new \Exception("HTTP error code: [$httpCode] - [$endpoint] - " . $responseBody);
         }
         $res =  $this->extractContentFromResponse($responseBody);
-        switch ($acao){
-            case 'Consultar':
-                $resultado = $this->formatConsultaSuccessResponse($res);
-                break;
-            case 'Cancelar':
-                $resultado = $this->formatCancelarSuccessResponse($res);
-                break;
+        $status = $this->isSuccess($res);
+        if ($status) {
+            switch ($acao) {
+                case 'GerarNfse':
+                    $resultado = $this->formatGerarSuccessResponse($res);
+                    break;
+                case 'Consultar':
+                    $resultado = $this->formatConsultaSuccessResponse($res);
+                    break;
+                case 'Cancelar':
+                    $resultado = $this->formatCancelarSuccessResponse($res);
+                    break;
+
+            }
+            return $resultado;
+        }else{
+            return $this->getErrors($res);
         }
-        return $resultado;
 
     }
     protected function extractContentFromResponse(string $response): string
@@ -92,7 +108,6 @@ class Soap
 
         return $response;
     }
-
     public function isSuccess(string $responseXml): bool
     {
         $encode = new XmlEncoder();
@@ -122,10 +137,10 @@ class Soap
         {
             $encode = new XmlEncoder();
             $resultArr = $encode->decode($responseXml, '');
-
             $responseArr = [];
             if (isset($resultArr['ListaNfse']) and isset($resultArr['ListaNfse']['CompNfse'])) {
                 $countResult = count($resultArr['ListaNfse']['CompNfse']);
+
                 if ($countResult <= 1) {
                     foreach ($resultArr['ListaNfse']['CompNfse'] as $nfse) {
                         $responseArr[] = $nfse['InfNfse'];
@@ -136,10 +151,10 @@ class Soap
                     }
                 }
             }
+            $i=0;
            foreach ($responseArr as $nfs) {
-                try {
-                    $doc = $nfs['TomadorServico']['IdentificacaoTomador']['CpfCnpj']['Cnpj'];
-                } catch (\Exception $e) {
+                $doc = $nfs['TomadorServico']['IdentificacaoTomador']['CpfCnpj']['Cnpj'];
+                if (is_null($doc)){
                     $doc = $nfs['TomadorServico']['IdentificacaoTomador']['CpfCnpj']['Cpf'];
                 }
                 try {
@@ -159,6 +174,41 @@ class Soap
             }
            return $resultado;
         }
+    public function formatGerarSuccessResponse(string $responseXml)
+    {
+        $encode = new XmlEncoder();
+        $resultArr = $encode->decode($responseXml, '');
+        $responseArr = [];
+        if (isset($resultArr['CompNfse']) and isset($resultArr['CompNfse']['Nfse'])) {
+            foreach ($resultArr['CompNfse'] as $nfse) {
+                $responseArr[] = $nfse['InfNfse'];
+            }
+            $i = 0;
+            foreach ($responseArr as $nfs) {
+                $doc = $nfs['TomadorServico']['IdentificacaoTomador']['CpfCnpj']['Cnpj'];
+                if (is_null($doc)) {
+                    $doc = $nfs['TomadorServico']['IdentificacaoTomador']['CpfCnpj']['Cpf'];
+                }
+                try {
+                    $numerorps = $nfs['IdentificacaoRps']['Numero'];
+                } catch (\Exception $e) {
+                    $numerorps = "";
+                }
+                $resultado = [
+                    'CNPJ' => $doc,
+                    'RAZAOSOCIAL' => $nfs['TomadorServico']['RazaoSocial'],
+                    'Numero' => $nfs['Numero'],
+                    'Autorizacao' => $nfs['CodigoVerificacao'],
+                    'DataEmissao' => $nfs['DataEmissao'],
+                    'NumeroRps' => $numerorps
+                ];
+                $i++;
+            }
+        }else{
+            return $resultArr['ListaMensagemRetorno']['MensagemRetorno'];
+        }
+        return $resultado;
+    }
     public function formatCancelarSuccessResponse(string $responseXml)
     {
         $encode = new XmlEncoder();
@@ -176,4 +226,5 @@ class Soap
         }
         return $responseArr;
         }
+
 }
