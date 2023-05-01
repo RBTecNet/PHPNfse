@@ -1,7 +1,6 @@
 <?php
 
 namespace Rbtecnet\Phpnfse\Provedores\Saquarema;
-
 use Symfony\Component\Serializer\Encoder\XmlEncoder;
 
 class Soap
@@ -23,11 +22,9 @@ class Soap
                 $action = 'http://tempuri.org/CancelarNfse';
                 break;
             case 'GerarNfse':
-                $action = 'http://tempuri.org/GerarNfse';
+                $action = 'http://tempuri.org/INFSEGeracao/EnviarLoteRpsSincrono';
                 break;
         }
-
-
         $msgSize = strlen($xml);
         $headers = ['Content-Type: text/xml;charset=UTF-8', "SOAPAction: \"$action\"", "Content-length: $msgSize"];
         //Configuracao do Curl
@@ -64,10 +61,10 @@ class Soap
         unlink($pemPath);
         $responseBody = trim(substr($response, $headSize));
         if ('' != $soapErr) {
-            throw new \Exception($soapErr . " [$endpoint]");
+            return $soapErr . " [$endpoint]";
         }
         if (200 != $httpCode) {
-            throw new \Exception("HTTP error code: [$httpCode] - [$endpoint] - " . $responseBody);
+            return "HTTP error code: [$httpCode] - [$endpoint] - " . $responseBody;
         }
         $res =  $this->extractContentFromResponse($responseBody);
         $status = $this->isSuccess($res);
@@ -90,9 +87,6 @@ class Soap
         }
 
     }
-
-
-
     protected function extractContentFromResponse(string $response): string
     {
         $dom = new \DomDocument('1.0', 'UTF-8');
@@ -106,16 +100,16 @@ class Soap
 
         return $response;
     }
-    public function isSuccess(string $responseXml): bool
+    public function isSuccess(string $responseXml)
     {
         $encode = new XmlEncoder();
-        $resultArr = $encode->decode($responseXml, '');
+        $resultArr = $encode->decode($encode->decode($responseXml, '')['s:Body']['EnviarLoteRpsSincronoResponse']['EnviarLoteRpsSincronoResult'],'');
         return !isset($resultArr['ListaMensagemRetorno']) ? true : false;
     }
     public function getErrors(string $responseXml): array
     {
         $encode = new XmlEncoder();
-        $resultArr = $encode->decode($responseXml, '');
+        $resultArr = $encode->decode($encode->decode($responseXml, '')['s:Body']['EnviarLoteRpsSincronoResponse']['EnviarLoteRpsSincronoResult'],'');
 
         if (isset($resultArr['ListaMensagemRetorno'])) {
             if (isset($resultArr['ListaMensagemRetorno']['MensagemRetorno']['Codigo'])) {
@@ -125,7 +119,6 @@ class Soap
                     $errors[] = $msgRetorno['Codigo'].' - '.$msgRetorno['Mensagem'];
                 }
             }
-
             return $errors;
         }
 
@@ -152,7 +145,6 @@ class Soap
            $i=0;
            foreach ($responseArr as $nfs) {
                $tomador = $nfs['DeclaracaoPrestacaoServico']['InfDeclaracaoPrestacaoServico']['Tomador'];
-
                 $doc = $tomador['IdentificacaoTomador']['CpfCnpj']['Cnpj'];
                 if (is_null($doc)){
                     $doc = $tomador['IdentificacaoTomador']['CpfCnpj']['Cpf'];
@@ -176,26 +168,28 @@ class Soap
     public function formatGerarSuccessResponse(string $responseXml)
     {
         $encode = new XmlEncoder();
-        $resultArr = $encode->decode($responseXml, '');
+        $resultArr = $resultArr = $encode->decode($encode->decode($responseXml, '')['s:Body']['EnviarLoteRpsSincronoResponse']['EnviarLoteRpsSincronoResult'],'')['ListaNfse'];
         $responseArr = [];
         if (isset($resultArr['CompNfse']) and isset($resultArr['CompNfse']['Nfse'])) {
             foreach ($resultArr['CompNfse'] as $nfse) {
                 $responseArr[] = $nfse['InfNfse'];
             }
             $i = 0;
+
             foreach ($responseArr as $nfs) {
-                $doc = $nfs['TomadorServico']['IdentificacaoTomador']['CpfCnpj']['Cnpj'];
+                $tomador = $nfs['DeclaracaoPrestacaoServico']['InfDeclaracaoPrestacaoServico']['Tomador'];
+                $doc = $tomador['IdentificacaoTomador']['CpfCnpj']['Cnpj'];
                 if (is_null($doc)) {
-                    $doc = $nfs['TomadorServico']['IdentificacaoTomador']['CpfCnpj']['Cpf'];
+                    $doc = $tomador['IdentificacaoTomador']['CpfCnpj']['Cpf'];
                 }
                 try {
-                    $numerorps = $nfs['IdentificacaoRps']['Numero'];
+                    $numerorps = $nfs['Numero'];
                 } catch (\Exception $e) {
                     $numerorps = "";
                 }
                 $resultado = [
                     'CNPJ' => $doc,
-                    'RAZAOSOCIAL' => $nfs['TomadorServico']['RazaoSocial'],
+                    'RAZAOSOCIAL' => $tomador['RazaoSocial'],
                     'Numero' => $nfs['Numero'],
                     'Autorizacao' => $nfs['CodigoVerificacao'],
                     'DataEmissao' => $nfs['DataEmissao'],
@@ -225,7 +219,6 @@ class Soap
         }
         return $responseArr;
         }
-
     public function gravaarquivo($arquivo, $conteudo){
         $file = fopen($arquivo, "w");
         fwrite($file, $conteudo);

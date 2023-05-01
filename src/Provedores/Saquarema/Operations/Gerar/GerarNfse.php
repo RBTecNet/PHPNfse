@@ -1,8 +1,8 @@
 <?php
 
-namespace Rbtecnet\Phpnfse\Provedores\NotaCarioca\Operations\Gerar;
+namespace Rbtecnet\Phpnfse\Provedores\Saquarema\Operations\Gerar;
 
-use Rbtecnet\Phpnfse\Provedores\NotaCarioca\Soap;
+use Rbtecnet\Phpnfse\Provedores\Saquarema\Soap;
 
 class GerarNfse
 {

@@ -1,8 +1,6 @@
 <?php
 
 namespace Rbtecnet\Phpnfse\Provedores\NotaCarioca;
-
-use phpDocumentor\Reflection\Types\Null_;
 use Symfony\Component\Serializer\Encoder\XmlEncoder;
 
 class Soap

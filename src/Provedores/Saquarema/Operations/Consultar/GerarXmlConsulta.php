@@ -25,7 +25,7 @@ class GerarXmlConsulta extends Soap
             $schema = Schema::parse($estrutura);
             $schema->validate($data);
         }catch (ValidationException $ve){
-            throw new \Exception(__FILE__.':'.__LINE__.' - '.$ve->getMessage());
+            return $ve->getMessage();
         }
         $xml = $encode->encode($data,'xml', ['xml_root_node_name' => 'rootnode', 'remove_empty_tags' => true]);
         $xml = str_replace('<?xml version="1.0"?>', '', $xml);

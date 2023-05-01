@@ -1,5 +1,5 @@
 <?php
-use Rbtecnet\Phpnfse\Provedores\NotaCarioca\Operations\Gerar\GerarNfse;
+use Rbtecnet\Phpnfse\Provedores\Saquarema\Operations\Gerar\GerarNfse;
 require "vendor/autoload.php";
 try {
     //rotina de teste de consulta
@@ -9,73 +9,86 @@ try {
     $senha = "Brasinorte155";
     $notas = "";
 
-    for ($i = 1; $i <= 1; $i++) {
-        $idrps = 20230430000205+$i;
-        $dados = [
-            'IdentificacaoRps' => [
-                'Numero' => $idrps,
-                'Serie' => 'A',
-                'Tipo' => 1,
-            ],
-            'DataEmissao' => date('Y-m-d') . 'T' . date('H:i:s'),
-            'NaturezaOperacao' => 1,
-            // 1 – Tributação no município
-            // 2 - Tributação fora do município
-            // 3 - Isenção
-            // 4 - Imune
-            // 5 – Exigibilidade suspensa por decisão judicial
-            // 6 – Exigibilidade suspensa por procedimento administrativo
-
-            //'RegimeEspecialTributacao' => 6, // optional
-            // 1 – Microempresa municipal
-            // 2 - Estimativa
-            // 3 – Sociedade de profissionais
-            // 4 – Cooperativa
-            // 5 – MEI – Simples Nacional
-            // 6 – ME EPP – Simples Nacional
-            'OptanteSimplesNacional' => 1, // 1 - Sim 2 - Não
-            'IncentivadorCultural' => 1, // 1 - Sim 2 - Não
-            'Status' => 1, // 1 – Normal  2 – Cancelado
-            'Prestador' => [
+    $numerolote = '20230501006';
+    $idrps = $numerolote;
+    $dados = [
+        'NumeroLote'=>$numerolote,
+        'Prestador' => [
+            'CpfCnpj'=>[
                 'Cnpj' => '03287545000119',
-                'InscricaoMunicipal' => '02615789', // optional
+             ],
+             'InscricaoMunicipal' => '02615789', // optional
+        ],
+        'QuantidadeRps'=>'1',
+        'Rps'=>[
+            'IdentificacaoRps'=>[
+                'Numero'=>$idrps,
+                'Serie'=>'ABC',
+                'Tipo'=>1,
             ],
-            'Tomador' => [
-                'IdentificacaoTomador' => [
-                    'CpfCnpj' => [
-                        'Cpf' => '09294692752'
-                    ]
+            'DataEmissao'=>date('Y-m-d'),
+            'Status'=>'1',
+        ],
+        'Competencia'=>date('Y-m-d'),
+        'Servico'=>[
+                'Valores'=>[
+                    'ValorServicos'=>'350.00',
+                    'ValorDeducoes'=>'0',
+                    'ValorPis'=>'2.28',
+                    'ValorCofins'=>'10.50',
+                    'ValorInss'=>'0',
+                    'ValorIr'=>'0',
+                    'ValorCsll'=>'3.50',
+                    'ValorIss'=>'17.50',
+                    'Aliquota'=>'5',
+                    'DescontoIncondicionado'=>'0',
+                    'DescontoCondicionado'=>'0',
                 ],
-                'RazaoSocial' => 'Bruno Almeida de Magalhães',
-                'Endereco' => [
-                    'Endereco' => 'Av Demetrio Ribeiro',
-                    'Numero' => 425,
-                    'Bairro' => 'Chacaras Rio Petrópolis',
-                    'CodigoMunicipio' => '3301702',
-                    'Uf' => 'RJ'
-                ],
+                'IssRetido'=>'1',
+                'ResponsavelRetencao'=>'1',
+                'ItemListaServico'=>'14.02',
+                'CodigoTributacaoMunicipio'=>'9512600',
+                'Discriminacao'=>'Nota de Teste de Emissão',
+                'CodigoMunicipio'=>'3304557',
+                'CodigoPais'=>'1058',
+                'ExigibilidadeISS'=>'1',
+                'MunicipioIncidencia'=>'3304557',
             ],
-            'Servico' => [
-                'ItemListaServico' => '1401', // Primeiros 4 digitos - https://notacarioca.rio.gov.br/files/leis/Resolucao_2617_2010_anexo2.pdf
-                'CodigoTributacaoMunicipio' => '140115', // 6 digitos - https://notacarioca.rio.gov.br/files/leis/Resolucao_2617_2010_anexo2.pdf
-                'Discriminacao' => 'Serviços de Teste',
-                'CodigoMunicipio' => '3301702',
-                'Valores' => [
-                    'ValorServicos' => 495.32,
-                    'IssRetido' => 2, // 1 para ISS Retido - 2 para ISS não Retido,
+                'Prestador'=>[
+                    'CpfCnpj'=>[
+                        'Cnpj'=>'18890963000173',
+                    ],
+                    'InscricaoMunicipal'=>'12717179',
                 ],
-            ],
-        ];
+                'Tomador'=>[
+                    'IdentificacaoTomador'=>[
+                        'CpfCnpj'=>[
+                            'Cnpj'=>'10473194000104',
+                        ],
+                    ],
+                    'RazaoSocial'=>'LBMS Serviços de Manutenção e Informatica Ltda',
+                    'Endereco'=>[
+                        'Endereco'=>'Av Demétrio Ribeiro',
+                        'Numero'=>'425',
+                        'Complemento'=>'Casa 15',
+                        'Bairro'=>'Chacaras Rio Petrópolis',
+                        'CodigoMunicipio'=>'3301702',
+                        'Uf'=>'RJ',
+                        'Cep'=>'25230020',
+                    ],
+                ],
+        'OptanteSimplesNacional'=>'2',
+        'IncentivoFiscal'=>'2',
+    ];
+    $operacao = new GerarNfse();
+    $retorno = $operacao->GerarNfse($ambiente, $dados, $certificado, $senha);
+    var_dump($retorno);
+    return;
 
-        $operacao = new GerarNfse();
-        $retorno = $operacao->GerarNfse($ambiente, $dados, $certificado, $senha);
-        var_dump($retorno);
-        return;
-        $notas = $notas . $retorno['CNPJ'].' - '. $retorno['RAZAOSOCIAL'].' - '. $retorno['Numero'].'<br/>';
-    }
 
 
-    echo $notas;
+
+
 
 
 
