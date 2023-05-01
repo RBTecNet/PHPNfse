@@ -1,6 +1,6 @@
 <?php
 
-use Rbtecnet\Phpnfse\Provedores\NotaCarioca\Operations\Cancelar\CancelarNfse;
+use Rbtecnet\Phpnfse\Provedores\Saquarema\Operations\Cancelar\CancelarNfse;
 
 require "vendor/autoload.php";
 //rotina de teste de consulta
@@ -12,12 +12,14 @@ $senha = "Brasinorte155";
 
 $dados = [
     'IdentificacaoNfse' => [
-        'Numero' => '23494',
-        'Cnpj' => '03287545000119',
-        'InscricaoMunicipal' => '02615789',
-        'CodigoMunicipio' => '3304557',
+        'Numero' => '202300000043826',
+        'CpfCnpj'=>[
+            'Cnpj' => '18890963000173',
+        ],
+        'InscricaoMunicipal' => '12717179',
+        'CodigoMunicipio' => '3305505',
     ],
-    'CodigoCancelamento' => '1',
+    'CodigoCancelamento' => '2',
 ];
 
 $operacao = new CancelarNfse();

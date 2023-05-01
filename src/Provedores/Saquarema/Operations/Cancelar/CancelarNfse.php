@@ -1,8 +1,8 @@
 <?php
 
-namespace Rbtecnet\Phpnfse\Provedores\NotaCarioca\Operations\Cancelar;
+namespace Rbtecnet\Phpnfse\Provedores\Saquarema\Operations\Cancelar;
 
-use Rbtecnet\Phpnfse\Provedores\NotaCarioca\Soap;
+use Rbtecnet\Phpnfse\Provedores\Saquarema\Soap;
 
 class CancelarNfse
 {

@@ -3,11 +3,11 @@
   <component name="ChangeListManager">
     <list default="true" id="590876e5-eb1d-4c6a-9b3e-f17b5adc02c2" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Saquarema/Exemplos/Cancelar.php" beforeDir="false" afterPath="$PROJECT_DIR$/Saquarema/Exemplos/Cancelar.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Saquarema/Exemplos/Consulta.php" beforeDir="false" afterPath="$PROJECT_DIR$/Saquarema/Exemplos/Consulta.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Saquarema/Exemplos/Emitir.php" beforeDir="false" afterPath="$PROJECT_DIR$/Saquarema/Exemplos/Emitir.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Provedores/NotaCarioca/Soap.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Provedores/NotaCarioca/Soap.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Provedores/Saquarema/Operations/Consultar/GerarXmlConsulta.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Provedores/Saquarema/Operations/Consultar/GerarXmlConsulta.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Provedores/Saquarema/Operations/Gerar/GerarNfse.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Provedores/Saquarema/Operations/Gerar/GerarNfse.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Provedores/Saquarema/Operations/Gerar/GerarXmlGerar.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Provedores/Saquarema/Operations/Gerar/GerarXmlGerar.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Provedores/Saquarema/Operations/Cancelar/CancelarNfse.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Provedores/Saquarema/Operations/Cancelar/CancelarNfse.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Provedores/Saquarema/Operations/Cancelar/GerarXmlCancela.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Provedores/Saquarema/Operations/Cancelar/GerarXmlCancela.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Provedores/Saquarema/Soap.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Provedores/Saquarema/Soap.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -88,7 +88,7 @@
       <workItem from="1682952616339" duration="27000" />
       <workItem from="1682952659261" duration="37000" />
       <workItem from="1682952715890" duration="12000" />
-      <workItem from="1682952775409" duration="10980000" />
+      <workItem from="1682952775409" duration="15572000" />
     </task>
     <servers />
   </component>
@@ -100,7 +100,19 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="origin/master" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
           </value>
         </entry>
       </map>

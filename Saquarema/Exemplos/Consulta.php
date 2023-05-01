@@ -16,8 +16,8 @@ try{
             'InscricaoMunicipal' => '12717179',
         ],
         'PeriodoEmissao' => [
-            'DataInicial' => '2023-04-01',
-            'DataFinal' => '2023-04-05',
+            'DataInicial' => '2023-05-01',
+            'DataFinal' => '2023-05-01',
         ],
         'Tomador' =>[
 

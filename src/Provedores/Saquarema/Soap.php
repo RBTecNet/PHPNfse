@@ -19,7 +19,7 @@ class Soap
                 $action = 'http://tempuri.org/INFSEConsultas/ConsultarNfse';
                 break;
             case 'Cancelar':
-                $action = 'http://tempuri.org/CancelarNfse';
+                $action = 'http://tempuri.org/INFSEGeracao/CancelarNfse';
                 break;
             case 'GerarNfse':
                 $action = 'http://tempuri.org/INFSEGeracao/EnviarLoteRpsSincrono';
@@ -67,7 +67,7 @@ class Soap
             return "HTTP error code: [$httpCode] - [$endpoint] - " . $responseBody;
         }
         $res =  $this->extractContentFromResponse($responseBody);
-        $status = $this->isSuccess($res);
+        $status = $this->isSuccess($res,$acao);
         if ($status) {
             switch ($acao) {
                 case 'GerarNfse':
@@ -83,7 +83,7 @@ class Soap
             }
             return $resultado;
         }else{
-            return $this->getErrors($res);
+            return $this->getErrors($res,$acao);
         }
 
     }
@@ -100,17 +100,24 @@ class Soap
 
         return $response;
     }
-    public function isSuccess(string $responseXml)
+    public function isSuccess(string $responseXml, $funcao='GerarNfse')
     {
         $encode = new XmlEncoder();
-        $resultArr = $encode->decode($encode->decode($responseXml, '')['s:Body']['EnviarLoteRpsSincronoResponse']['EnviarLoteRpsSincronoResult'],'');
+        if ($funcao=='GerarNfse') {
+            $resultArr = $encode->decode($encode->decode($responseXml, '')['s:Body']['EnviarLoteRpsSincronoResponse']['EnviarLoteRpsSincronoResult'],'');
+        }else if ($funcao=='Cancelar'){
+            $resultArr = $encode->decode($encode->decode($responseXml, '')['s:Body']['CancelarNfseResponse']['CancelarNfseResult'],'');
+        }
         return !isset($resultArr['ListaMensagemRetorno']) ? true : false;
     }
-    public function getErrors(string $responseXml): array
+    public function getErrors(string $responseXml, $funcao='GerarNfse'): array
     {
         $encode = new XmlEncoder();
-        $resultArr = $encode->decode($encode->decode($responseXml, '')['s:Body']['EnviarLoteRpsSincronoResponse']['EnviarLoteRpsSincronoResult'],'');
-
+        if ($funcao=='GerarNfse'){
+            $resultArr = $encode->decode($encode->decode($responseXml, '')['s:Body']['EnviarLoteRpsSincronoResponse']['EnviarLoteRpsSincronoResult'],'');
+        }else if($funcao=='Cancelar'){
+            $resultArr = $encode->decode($encode->decode($responseXml, '')['s:Body']['CancelarNfseResponse']['CancelarNfseResult'],'');
+        }
         if (isset($resultArr['ListaMensagemRetorno'])) {
             if (isset($resultArr['ListaMensagemRetorno']['MensagemRetorno']['Codigo'])) {
                 $errors[] = $resultArr['ListaMensagemRetorno']['MensagemRetorno']['Codigo'].' - '.$resultArr['ListaMensagemRetorno']['MensagemRetorno']['Mensagem'];
@@ -205,11 +212,11 @@ class Soap
     public function formatCancelarSuccessResponse(string $responseXml)
     {
         $encode = new XmlEncoder();
-        $resultArr = $encode->decode($responseXml, '');
-        //return $resultArr;
+        $resultArr = $resultArr = $encode->decode($encode->decode($responseXml, '')['s:Body']['CancelarNfseResponse']['CancelarNfseResult'],'')['RetCancelamento'];
         $responseArr = [];
-        if (isset($resultArr['Cancelamento']) and isset($resultArr['Cancelamento']['Confirmacao'])) {
-            foreach ($resultArr['Cancelamento'] as $nfse) {
+
+        if (isset($resultArr['NfseCancelamento']) and isset($resultArr['NfseCancelamento']['Confirmacao'])) {
+            foreach ($resultArr['NfseCancelamento'] as $nfse) {
                 $responseArr[] = $nfse;
             }
         } else {
