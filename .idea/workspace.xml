@@ -63,10 +63,15 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/Provedores/Saquarema" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\bruno\OneDrive\Área de Trabalho\projetos\rbtecnet-nfse\src\Provedores\Saquarema" />
+      <recent name="C:\Users\bruno\OneDrive\Área de Trabalho\projetos\rbtecnet-nfse\Saquarema" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\bruno\OneDrive\Área de Trabalho\projetos\rbtecnet-nfse\Carioca\Exemplos_Carioca" />
       <recent name="C:\Users\bruno\OneDrive\Área de Trabalho\projetos\rbtecnet-nfse\Carioca" />
@@ -80,7 +85,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1682780083848</updated>
-      <workItem from="1682780091479" duration="39643000" />
+      <workItem from="1682780091479" duration="49478000" />
     </task>
     <servers />
   </component>
