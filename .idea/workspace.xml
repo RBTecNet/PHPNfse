@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="590876e5-eb1d-4c6a-9b3e-f17b5adc02c2" name="Changes" comment="">
+    <list default="true" id="be7318c1-3fdc-4cd9-8135-6c0a09d417d5" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Carioca/Exemplos/Cancelar.php" beforeDir="false" afterPath="$PROJECT_DIR$/Carioca/Exemplos/Cancelar.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Carioca/Exemplos/Consulta.php" beforeDir="false" afterPath="$PROJECT_DIR$/Carioca/Exemplos/Consulta.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Carioca/Exemplos/Emitir.php" beforeDir="false" afterPath="$PROJECT_DIR$/Carioca/Exemplos/Emitir.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Saquarema/Exemplos/Cancelar.php" beforeDir="false" afterPath="$PROJECT_DIR$/Saquarema/Exemplos/Cancelar.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Saquarema/Exemplos/Consulta.php" beforeDir="false" afterPath="$PROJECT_DIR$/Saquarema/Exemplos/Consulta.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Saquarema/Exemplos/Emitir.php" beforeDir="false" afterPath="$PROJECT_DIR$/Saquarema/Exemplos/Emitir.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Provedores/Saquarema/Operations/Cancelar/CancelarNfse.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Provedores/Saquarema/Operations/Cancelar/CancelarNfse.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Provedores/Saquarema/Operations/Cancelar/GerarXmlCancela.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Provedores/Saquarema/Operations/Cancelar/GerarXmlCancela.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Provedores/NotaCarioca/Soap.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Provedores/NotaCarioca/Soap.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Provedores/Saquarema/Soap.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Provedores/Saquarema/Soap.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -27,8 +29,6 @@
   </component>
   <component name="PhpWorkspaceProjectConfiguration">
     <include_path>
-      <path value="$PROJECT_DIR$/vendor/composer" />
-      <path value="$PROJECT_DIR$/vendor/vanilla/garden-schema" />
       <path value="$PROJECT_DIR$/vendor/phpdocumentor/reflection-docblock" />
       <path value="$PROJECT_DIR$/vendor/phpdocumentor/type-resolver" />
       <path value="$PROJECT_DIR$/vendor/phpstan/phpdoc-parser" />
@@ -36,6 +36,7 @@
       <path value="$PROJECT_DIR$/vendor/symfony/deprecation-contracts" />
       <path value="$PROJECT_DIR$/vendor/symfony/polyfill-ctype" />
       <path value="$PROJECT_DIR$/vendor/symfony/property-access" />
+      <path value="$PROJECT_DIR$/vendor/composer" />
       <path value="$PROJECT_DIR$/vendor/symfony/property-info" />
       <path value="$PROJECT_DIR$/vendor/symfony/serializer" />
       <path value="$PROJECT_DIR$/vendor/symfony/serializer-pack" />
@@ -43,6 +44,7 @@
       <path value="$PROJECT_DIR$/vendor/symfony/polyfill-intl-grapheme" />
       <path value="$PROJECT_DIR$/vendor/symfony/polyfill-intl-normalizer" />
       <path value="$PROJECT_DIR$/vendor/symfony/polyfill-mbstring" />
+      <path value="$PROJECT_DIR$/vendor/vanilla/garden-schema" />
       <path value="$PROJECT_DIR$/vendor/symfony/polyfill-php80" />
       <path value="$PROJECT_DIR$/vendor/symfony/string" />
       <path value="$PROJECT_DIR$/vendor/doctrine/deprecations" />
@@ -51,7 +53,7 @@
       <path value="$PROJECT_DIR$/vendor/webmozart/assert" />
     </include_path>
   </component>
-  <component name="ProjectId" id="2P6adxOPFmQPpj6DJEKho9xCdH5" />
+  <component name="ProjectId" id="2PDCVQ59gMVUC13AZ0kmkWy830S" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -61,61 +63,24 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="vue.rearranger.settings.migration" value="true" />
-  </component>
-  <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\bruno\OneDrive\Área de Trabalho\projetos\rbtecnet-nfse\src\Provedores\Saquarema" />
-      <recent name="C:\Users\bruno\OneDrive\Área de Trabalho\projetos\rbtecnet-nfse\Saquarema" />
-    </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\bruno\OneDrive\Área de Trabalho\projetos\rbtecnet-nfse\Carioca\Exemplos_Carioca" />
-      <recent name="C:\Users\bruno\OneDrive\Área de Trabalho\projetos\rbtecnet-nfse\Carioca" />
-    </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="590876e5-eb1d-4c6a-9b3e-f17b5adc02c2" name="Changes" comment="" />
-      <created>1682780083848</created>
+      <changelist id="be7318c1-3fdc-4cd9-8135-6c0a09d417d5" name="Changes" comment="" />
+      <created>1682982289148</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1682780083848</updated>
-      <workItem from="1682780091479" duration="55286000" />
-      <workItem from="1682951573263" duration="1032000" />
-      <workItem from="1682952616339" duration="27000" />
-      <workItem from="1682952659261" duration="37000" />
-      <workItem from="1682952715890" duration="12000" />
-      <workItem from="1682952775409" duration="15572000" />
+      <updated>1682982289148</updated>
+      <workItem from="1682982292008" duration="68000" />
+      <workItem from="1683948198659" duration="3895000" />
+      <workItem from="1683996146830" duration="8412000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
-  </component>
-  <component name="Vcs.Log.Tabs.Properties">
-    <option name="TAB_STATES">
-      <map>
-        <entry key="MAIN">
-          <value>
-            <State>
-              <option name="FILTERS">
-                <map>
-                  <entry key="branch">
-                    <value>
-                      <list>
-                        <option value="origin/master" />
-                      </list>
-                    </value>
-                  </entry>
-                </map>
-              </option>
-            </State>
-          </value>
-        </entry>
-      </map>
-    </option>
   </component>
 </project>

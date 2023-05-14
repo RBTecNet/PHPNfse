@@ -12,7 +12,7 @@ $senha = "Brasinorte155";
 
 $dados = [
     'IdentificacaoNfse' => [
-        'Numero' => '23494',
+        'Numero' => '31073',
         'Cnpj' => '03287545000119',
         'InscricaoMunicipal' => '02615789',
         'CodigoMunicipio' => '3304557',

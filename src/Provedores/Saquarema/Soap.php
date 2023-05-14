@@ -137,15 +137,34 @@ class Soap
             $resultArr = $encode->decode($responseXml, '')['s:Body']['ConsultarNfseResponse']['ConsultarNfseResult'];
             $resultArr = $encode->decode($resultArr, '');
             $responseArr = [];
+
             if (isset($resultArr['ListaNfse']) and isset($resultArr['ListaNfse']['CompNfse'])) {
-                $countResult = count($resultArr['ListaNfse']['CompNfse']);
+                $temp = $resultArr['ListaNfse']['CompNfse'];
+                unset($temp['NfseCancelamento']);
+                $countResult = count($temp);
+                //return $resultArr['ListaNfse']['CompNfse']['NfseCancelamento'];
                 if ($countResult <= 1) {
-                    foreach ($resultArr['ListaNfse']['CompNfse'] as $nfse) {
-                        $responseArr[] = $nfse['InfNfse'];
+                    if (isset($resultArr['ListaNfse']['CompNfse']['NfseCancelamento'])){
+                        $resultArr['ListaNfse']['CompNfse']['Nfse']['InfNfse']['Status']='Cancelado';
+                        $resultArr['ListaNfse']['CompNfse']['Nfse']['InfNfse']['DataCancelamento']=$resultArr['ListaNfse']['CompNfse']['NfseCancelamento']['Confirmacao']['DataHora'];
+                    }else{
+                        $resultArr['ListaNfse']['CompNfse']['Nfse']['InfNfse']['Status']='Normal';
+                        $resultArr['ListaNfse']['CompNfse']['Nfse']['InfNfse']['DataCancelamento']='0000-00-00';
                     }
+                    $responseArr[] = $resultArr['ListaNfse']['CompNfse']['Nfse']['InfNfse'];
                 } else {
                     foreach ($resultArr['ListaNfse']['CompNfse'] as $nfse) {
+                        if (isset($nfse['NfseCancelamento'])){
+                            $nfse['Nfse']['InfNfse']['Status']='Cancelado';
+                            $nfse['Nfse']['InfNfse']['DataCancelamento']=$nfse['NfseCancelamento']['Confirmacao']['DataHora'];
+                        }else{
+                            $nfse['Nfse']['InfNfse']['Status']='Normal';
+                            $nfse['Nfse']['InfNfse']['DataCancelamento']='0000-00-00';
+                        }
                         $responseArr[] = $nfse['Nfse']['InfNfse'];
+                        //$responseArr[] = $nfse['NfseCancelamento']['Confirmacao']['DataHora'];//['Nfse']['InfNfse'];
+                        //$responseArr[] = $nfse['Nfse']['InfNfse'];
+                        //return $responseArr;
                     }
                 }
             }
@@ -166,7 +185,9 @@ class Soap
                     'Numero' => $nfs['Numero'],
                     'Autorizacao' => $nfs['CodigoVerificacao'],
                     'DataEmissao' => $nfs['DataEmissao'],
-                    'NumeroRps' => $numerorps
+                    'NumeroRps' => $numerorps,
+                    'Status' => $nfs['Status'],
+                    'DataCancelamento' => $nfs['DataCancelamento']
                 ];
                 $i++;
             }

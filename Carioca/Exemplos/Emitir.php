@@ -10,7 +10,7 @@ try {
     $notas = "";
 
     for ($i = 1; $i <= 1; $i++) {
-        $idrps = 20230430000205+$i;
+        $idrps = 20230430001205+$i;
         $dados = [
             'IdentificacaoRps' => [
                 'Numero' => $idrps,

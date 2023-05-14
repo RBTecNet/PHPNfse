@@ -17,7 +17,7 @@ try{
         ],
         'PeriodoEmissao' => [
             'DataInicial' => '2023-05-01',
-            'DataFinal' => '2023-05-01',
+            'DataFinal' => '2023-05-05',
         ],
         'Tomador' =>[
 

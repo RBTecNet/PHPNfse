@@ -9,7 +9,7 @@ try {
     $senha = "Brasinorte155";
     $notas = "";
 
-    $numerolote = '20230501008';
+    $numerolote = '20230501009';
     $idrps = $numerolote;
     $dados = [
         'NumeroLote'=>$numerolote,
