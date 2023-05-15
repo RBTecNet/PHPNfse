@@ -3,8 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="be7318c1-3fdc-4cd9-8135-6c0a09d417d5" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Saquarema/Exemplos/Download.php" beforeDir="false" afterPath="$PROJECT_DIR$/Saquarema/Exemplos/Download.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Provedores/Saquarema/Operations/Download/DownloadDanfeNfse.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Provedores/Saquarema/Operations/Download/DownloadDanfeNfse.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -78,7 +76,8 @@
       <updated>1682982289148</updated>
       <workItem from="1682982292008" duration="68000" />
       <workItem from="1683948198659" duration="3895000" />
-      <workItem from="1683996146830" duration="11498000" />
+      <workItem from="1683996146830" duration="12692000" />
+      <workItem from="1684119623439" duration="1076000" />
     </task>
     <servers />
   </component>

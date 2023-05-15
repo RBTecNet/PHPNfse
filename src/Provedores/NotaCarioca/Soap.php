@@ -167,16 +167,16 @@ class Soap
             }
             $i=0;
            foreach ($responseArr as $nfs) {
-                $doc = $nfs['TomadorServico']['IdentificacaoTomador']['CpfCnpj']['Cnpj'];
-                if (is_null($doc)){
-                    $doc = $nfs['TomadorServico']['IdentificacaoTomador']['CpfCnpj']['Cpf'];
-                }
-                try {
-                    $numerorps = $nfs['IdentificacaoRps']['Numero'];
-                } catch (\Exception $e) {
-                    $numerorps = "";
-                }
-                $resultado[$i] = [
+               if (isset($nfs['TomadorServico']['IdentificacaoTomador']['CpfCnpj']['Cnpj'])){
+                   $doc = $nfs['TomadorServico']['IdentificacaoTomador']['CpfCnpj']['Cnpj'];
+               }else{
+                   $doc = $nfs['TomadorServico']['IdentificacaoTomador']['CpfCnpj']['Cpf'];
+               }
+               $numerorps = "";
+               if (isset($nfs['IdentificacaoRps']['Numero'])){
+                   $numerorps = $nfs['IdentificacaoRps']['Numero'];
+               }
+               $resultado[$i] = [
                     'CNPJ' => $doc,
                     'RAZAOSOCIAL' => $nfs['TomadorServico']['RazaoSocial'],
                     'Numero' => $nfs['Numero'],
@@ -203,15 +203,16 @@ class Soap
             }
             $i = 0;
             foreach ($responseArr as $nfs) {
-                $doc = $nfs['TomadorServico']['IdentificacaoTomador']['CpfCnpj']['Cnpj'];
-                if (is_null($doc)) {
+                if (isset($nfs['TomadorServico']['IdentificacaoTomador']['CpfCnpj']['Cnpj'])){
+                    $doc = $nfs['TomadorServico']['IdentificacaoTomador']['CpfCnpj']['Cnpj'];
+                }else{
                     $doc = $nfs['TomadorServico']['IdentificacaoTomador']['CpfCnpj']['Cpf'];
                 }
-                try {
+                $numerorps = "";
+                if (isset($nfs['IdentificacaoRps']['Numero'])){
                     $numerorps = $nfs['IdentificacaoRps']['Numero'];
-                } catch (\Exception $e) {
-                    $numerorps = "";
                 }
+
                 $resultado = [
                     'CNPJ' => $doc,
                     'RAZAOSOCIAL' => $nfs['TomadorServico']['RazaoSocial'],
